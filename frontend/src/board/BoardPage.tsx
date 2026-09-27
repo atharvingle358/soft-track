@@ -335,9 +335,19 @@ export default function BoardPage() {
   }
 
   const openIssue = loadedIssue ?? (issueNumber ? fetchedIssue.data : undefined)
-  const selectedCycle = teamData.cycles.find((cycle) => cycle.id === filters.cycleId) ?? null
+
+  const issueNotFound =
+    Boolean(issueNumber) &&
+    !loadedIssue &&
+    !fetchedIssue.isLoading &&
+    fetchedIssue.isError
+
+  const selectedCycle =
+    teamData.cycles.find((cycle) => cycle.id === filters.cycleId) ?? null
+
   const isTeamAdmin =
     teamData.members.find((member) => member.user.id === user?.id)?.role === 'admin'
+
   // Nothing to save while this board is already a view somebody named.
   const matchesSavedView = savedViews.views.some(
     (candidate) =>
@@ -363,17 +373,17 @@ export default function BoardPage() {
       onNewCycle={
         canWrite
           ? () => {
-              setSidebarOpen(false)
-              overlays.open('newCycle')
-            }
+            setSidebarOpen(false)
+            overlays.open('newCycle')
+          }
           : undefined
       }
       onImport={
         canWrite
           ? () => {
-              setSidebarOpen(false)
-              overlays.open('import')
-            }
+            setSidebarOpen(false)
+            overlays.open('import')
+          }
           : undefined
       }
     />
@@ -476,8 +486,8 @@ export default function BoardPage() {
         !searchQuery &&
         (view === 'board' || view === 'list') &&
         projectPageId === null && (
-        <BulkActionBar selectedIds={selection.ids} bulk={bulk} onClear={clearSelection} />
-      )}
+          <BulkActionBar selectedIds={selection.ids} bulk={bulk} onClear={clearSelection} />
+        )}
       {overlays.isOpen('palette') && (
         <CommandPalette
           onClose={() => overlays.close('palette')}
@@ -510,7 +520,21 @@ export default function BoardPage() {
       )}
       <IssuePeekLayer peek={peek} issue={peekedIssue} onPromote={leaveForIssue} />
       {issueNumber && openIssue && (
-        <IssueDetailPanel issueId={openIssue.id} onClose={() => navigate(`/${team.key}`)} />
+        <IssueDetailPanel
+          issueId={openIssue.id}
+          onClose={() => navigate(`/${team.key}`)}
+        />
+      )}
+
+      {issueNumber && issueNotFound && (
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-lg font-semibold">No such issue</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Issue #{issueNumber} does not exist in this team.
+            </p>
+          </div>
+        </div>
       )}
     </TeamProvider>
   )
