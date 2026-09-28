@@ -18,6 +18,7 @@ export type IconName =
   | 'check'
   | 'link'
   | 'upload'
+  | 'download'
   | 'logout'
   | 'sparkle'
   | 'command'
@@ -44,6 +45,9 @@ export type IconName =
   | 'smile'
   | 'download'
   | 'calendar-grid'
+  | 'expand'
+  | 'lock'
+  | 'building'
 
 const PATHS: Record<IconName, JSX.Element> = {
   search: (
@@ -87,6 +91,8 @@ const PATHS: Record<IconName, JSX.Element> = {
   ),
   upload: <path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />,
   download: <path d="M12 4v12m0 0-4-4m4 4 4-4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" />,
+  // Out to the corners: the panel opened out into a page of its own (#112).
+  expand: <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />,
   logout: <path d="M10 17l5-5-5-5M15 12H3M13 4h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6" />,
   sparkle: <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.3 6.3l2.8 2.8M14.9 14.9l2.8 2.8M6.3 17.7l2.8-2.8M14.9 9.1l2.8-2.8" />,
   command: (
@@ -113,6 +119,18 @@ const PATHS: Record<IconName, JSX.Element> = {
     </>
   ),
   shield: <path d="M12 3l7.5 3v5.5c0 4.4-3 8.4-7.5 9.5-4.5-1.1-7.5-5.1-7.5-9.5V6L12 3Z" />,
+  lock: (
+    <>
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </>
+  ),
+  building: (
+    <>
+      <rect x="5" y="3" width="14" height="18" rx="1.5" />
+      <path d="M9 7h.01M12 7h.01M15 7h.01M9 11h.01M12 11h.01M15 11h.01M10 21v-4h4v4" />
+    </>
+  ),
   mail: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2" />
@@ -185,7 +203,7 @@ const PATHS: Record<IconName, JSX.Element> = {
       <path d="M3 12h6M15 12h6" />
     </>
   ),
-  // Issue types (#89). Three different outlines -- a rounded body with legs, a
+  // Ticket types (#89). Three different outlines -- a rounded body with legs, a
   // square with a tick, a bookmark -- so they are told apart by shape, not by
   // the colour they are drawn in.
   bug: (

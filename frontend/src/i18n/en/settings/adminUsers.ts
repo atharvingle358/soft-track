@@ -2,7 +2,7 @@
 export const adminUsers = {
   title: 'Users',
   intro:
-    'Every account on this SoftTrack. Accounts are deactivated rather than deleted — issues, comments and history all point at them.',
+    'Every account on this SoftTrack. Accounts are deactivated rather than deleted — tickets, comments and history all point at them.',
   searchLabel: 'Search users',
   searchPlaceholder: 'Name, email or username',
   loading: 'Loading users…',
@@ -13,11 +13,18 @@ export const adminUsers = {
   lastSeen: 'last seen {{when}}',
   neverSignedIn: 'never signed in',
   joined: 'joined {{date}}',
+  startedOn: 'started {{date}}',
+  reportsTo: 'reports to {{name}}',
+  reportsToDeactivated: 'reports to {{name}} (deactivated)',
+  directReports_one: '{{count}} direct report',
+  directReports_other: '{{count}} direct reports',
+  edit: 'Edit',
+  editLabel: 'Edit {{name}}',
   deactivate: 'Deactivate',
   reactivate: 'Reactivate',
   cannotDeactivateSelf: 'You cannot deactivate your own account',
   confirmDeactivate:
-    'Deactivate {{name}}? They will be signed out immediately and cannot sign in again. Their issues, comments and history are untouched.',
+    'Deactivate {{name}}? They will be signed out immediately and cannot sign in again. Their tickets, comments and history are untouched.',
   makeSiteAdmin: 'Make site admin',
   removeSiteAdmin: 'Remove site admin',
   cannotChangeOwnAdmin: 'You cannot change your own site admin access',
@@ -28,6 +35,30 @@ export const adminUsers = {
   errors: {
     update: 'Could not update that account.',
     reset: 'Could not reset that password.',
+  },
+  /** The organisation's facts about someone, set on their row (#122). */
+  editor: {
+    label: 'Organisation details for {{name}}',
+    department: 'Department',
+    noDepartment: 'No department',
+    manager: 'Manager',
+    managerOf: 'Manager of {{name}}',
+    noManager: 'No manager',
+    searchPeople: 'Search people',
+    startDate: 'Start date',
+    theirs: 'Job title and location are {{name}}’s to edit, from their own profile.',
+  },
+  /** People whose manager has been deactivated (#124). */
+  stranded: {
+    banner_one:
+      '<strong>{{count}} person reports to a deactivated manager</strong> ({{names}}).',
+    banner_other:
+      '<strong>{{count}} people report to a deactivated manager</strong> ({{names}}).',
+    show: 'Show them',
+    filter: 'Reports of a deactivated manager',
+    clear: 'Show everyone',
+    count_one: '{{count}} person',
+    count_other: '{{count}} people',
   },
   resetDialog: {
     title: 'Reset password',
